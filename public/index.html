@@ -1,91 +1,131 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aeromet</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.3.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.3.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-performance-compat.js"></script>
-    <script type="module" src="/index.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aeromet</title>
+  <script type="module" src="/index.js"></script>
+  <link rel="stylesheet" href="index.css">
+  <script>
+    window.onscroll = function() { scrollFunction() };
+    function scrollFunction() 
+    {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) 
+      {
+        document.getElementById("navbar").style.padding = "30px 10px";
+        document.getElementById("logo").style.fontSize = "25px";
+      } 
+      else 
+      {
+        document.getElementById("navbar").style.padding = "80px 10px";
+        document.getElementById("logo").style.fontSize = "35px";
+      }
+    }
+    topFunction();
+    function topFunction() 
+    {
+      document.documentElement.scrollTop = 0;
+    }
+    function openPage(pageName) 
+    {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) 
+      {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) 
+      {
+        tablinks[i].style.backgroundColor = "";
+      }
+      document.getElementById(pageName).style.display = "block";
+      topFunction();
+    }
+  </script>
+</head>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 425px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-      input, label {
-        display:block;
-        margin-right: 15px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>AEROMET</h2>
-      <p>Humidade Atual: <b id="humidity"></b></p>
-      <p>Presssão Atual: <b id="pressure"></b> </p>
-      <p>Temperatura Atual: <b id="temperature"></b></p>
-      <h2>Condições Meterológicas para aprovar o início do Voo</h2>
-      <br>
-      <form>
-        <table>
-          <tr>
-            <td>
-              <label for="humidityFrom">Humidade de:</label>
-              <input type="number" id="humidityFrom" name="humidityUpTo"><br>
-            </td>
-            <td>
-              <label for="humidityUpTo">Humidade até:</label>
-              <input type="number" id="humidityUpTo" name="humidityUpTo"><br>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="pressureFrom">Pressão de:</label>
-              <input type="number" id="pressureFrom" name="pressureUpTo"><br>
-            </td>
-            <td>
-              <label for="pressureUpTo">Pressão até:</label>
-              <input type="number" id="pressureUpTo" name="pressureUpTo"><br>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="temperatureFrom">Temperatura de:</label>
-              <input type="number" id="temperatureFrom" name="temperatureUpTo"><br>
-            </td>
-            <td>
-              <label for="temperatureUpTo">Temperatura até:</label>
-              <input type="number" id="temperatureUpTo" name="temperatureUpTo"><br>
-            </td>
-          </tr>
-        </table>
-        <button type="button" id="save">Salvar</button>
-      </form>
+<body>
+  <header>
+    <div id="navbar">
+      <a href="#default" onclick="openPage('Inicio')" id="logo">Aeromet</a>
+      <div id="navbar-right">
+        <button onclick="openPage('Inicio')">Início</button>
+        <button onclick="openPage('CoordenadorVoo')">Coordenador de Voo</button>
+        <button onclick="openPage('SobreNos')">Sobre Nós</button>
+        <button onclick="openPage('Contato')">Contato</button>
+        <button onclick="openPage('Login')">Login</button>
+      </div>
     </div>
-  </body>
+  </header>
+  <footer>
+
+  </footer>
+  <div class="content">
+    <div id="Inicio" class="tabcontent">
+      <h3>Inicio</h3>
+      <p>Home is where the heart is..</p>
+    </div>
+    <div id="CoordenadorVoo" class="tabcontent">
+      <h3>Coordenador de Voo</h3>
+      <div id="message">
+        <h2>AEROMET</h2>
+        <p>Humidade Atual: <b id="humidity"></b></p>
+        <p>Presssão Atual: <b id="pressure"></b> </p>
+        <p>Temperatura Atual: <b id="temperature"></b></p>
+        <h2>Condições Meterológicas para aprovar o início do Voo</h2>
+        <br>
+        <form>
+          <table>
+            <tr>
+              <td>
+                <label for="humidityFrom">Humidade de:</label>
+                <input type="number" id="humidityFrom" name="humidityUpTo"><br>
+              </td>
+              <td>
+                <label for="humidityUpTo">Humidade até:</label>
+                <input type="number" id="humidityUpTo" name="humidityUpTo"><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="pressureFrom">Pressão de:</label>
+                <input type="number" id="pressureFrom" name="pressureUpTo"><br>
+              </td>
+              <td>
+                <label for="pressureUpTo">Pressão até:</label>
+                <input type="number" id="pressureUpTo" name="pressureUpTo"><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="temperatureFrom">Temperatura de:</label>
+                <input type="number" id="temperatureFrom" name="temperatureUpTo"><br>
+              </td>
+              <td>
+                <label for="temperatureUpTo">Temperatura até:</label>
+                <input type="number" id="temperatureUpTo" name="temperatureUpTo"><br>
+              </td>
+            </tr>
+          </table>
+          <button type="button" id="save">Salvar</button>
+        </form>
+      </div>
+    </div>
+    <div id="SobreNos" class="tabcontent">
+      <h3>Sobre Nós</h3>
+      <p>Some news this fine day!</p>
+    </div>
+    <div id="Contato" class="tabcontent">
+      <h3>Contato</h3>
+      <p>Get in touch, or swing by for a cup of coffee.</p>
+    </div>
+    <div id="Login" class="tabcontent">
+      <h3>Login</h3>
+      <p>Who we are and what we do.</p>
+    </div>
+  </div>
+</body>
+
 </html>

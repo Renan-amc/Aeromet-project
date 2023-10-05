@@ -3,14 +3,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAd6IADZfeTRD6o_NYPuVCuauhrBSAuoZE",
-  authDomain: "aeromet-usf.firebaseapp.com",
-  databaseURL: "https://aeromet-usf-default-rtdb.firebaseio.com",
-  projectId: "aeromet-usf",
-  storageBucket: "aeromet-usf.appspot.com",
-  messagingSenderId: "995947231039",
-  appId: "1:995947231039:web:1276916dd2f74a4a00c58a",
-  measurementId: "G-CFQN7MGRPS"
+    apiKey: "AIzaSyAd6IADZfeTRD6o_NYPuVCuauhrBSAuoZE",
+    authDomain: "aeromet-usf.firebaseapp.com",
+    databaseURL: "https://aeromet-usf-default-rtdb.firebaseio.com",
+    projectId: "aeromet-usf",
+    storageBucket: "aeromet-usf.appspot.com",
+    messagingSenderId: "995947231039",
+    appId: "1:995947231039:web:1276916dd2f74a4a00c58a",
+    measurementId: "G-CFQN7MGRPS"
 };
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -21,7 +21,6 @@ document.getElementById("save").onclick = function() {
 }
 function saveSetPoints()
 {
-	console.log('Salvando...', writeSetPoints());
     set(ref(db, 'setPoints'), writeSetPoints());
 }
 function updateData()
@@ -42,9 +41,11 @@ function getData(path,htmlId,htmlProperty,symbol)
     {
         if (snapshot.exists()) 
         {
-        document.getElementById(htmlId)[htmlProperty] = snapshot.val() + symbol;
-        } else {
-        console.log("No data available ->", htmlId);
+            document.getElementById(htmlId)[htmlProperty] = snapshot.val() + symbol;
+        } 
+        else 
+        {
+            console.log("No data available ->", htmlId);
         }
     }).catch((error) => 
     {
