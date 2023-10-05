@@ -13,12 +13,13 @@ body {
 #navbar {
   overflow: hidden;
   background-color: #f1f1f1;
-  padding: 90px 10px;
+  padding: 70px 10px;
   transition: 0.4s;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 99;
+  display:inline;
 }
 
 #navbar a {
@@ -39,9 +40,12 @@ body {
   text-decoration: none;
   font-size: 18px; 
   line-height: 25px;
-  border-radius: 7px;
   border: none;
+  border-radius: 7px;
   border-bottom: 3px solid white;
+  border-bottom-left-radius: 0px 0px;
+  border-bottom-right-radius: 0px 0px;
+  margin-right: 20px;
 }
 #navbar #logo {
   font-size: 35px;
@@ -56,6 +60,8 @@ body {
 
 #navbar-right {
   float: right;
+  display:inline;
+  margin-right: 2%;
 }
 
 @media screen and (max-width: 580px) {
@@ -73,10 +79,10 @@ body {
   }
 }
 .content {
-	margin-top:210px;
-    padding:15px 15px 1000px;
-    font-size:30px;
-    color: black;
+	margin-top:170px;
+  padding:15px 15px 1000px;
+  font-size:30px;
+  color: black;
 }
 .tabcontent {
   display: none;
