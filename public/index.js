@@ -1,17 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
+import { firebaseConfig }  from "./firebase.js"
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAd6IADZfeTRD6o_NYPuVCuauhrBSAuoZE",
-    authDomain: "aeromet-usf.firebaseapp.com",
-    databaseURL: "https://aeromet-usf-default-rtdb.firebaseio.com",
-    projectId: "aeromet-usf",
-    storageBucket: "aeromet-usf.appspot.com",
-    messagingSenderId: "995947231039",
-    appId: "1:995947231039:web:1276916dd2f74a4a00c58a",
-    measurementId: "G-CFQN7MGRPS"
-};
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const dbRef = ref(db);
