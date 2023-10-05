@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
-import { firebaseConfig }  from "./firebase.js"
+import { firebaseConfig }  from "./firebase/firebase.js"
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
