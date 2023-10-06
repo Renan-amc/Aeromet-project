@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: white; 
+  background: black; 
   color: rgba(0,0,0,0.87); 
   font-family: Roboto, Helvetica, Arial, sans-serif; 
   margin: 0; 
@@ -12,7 +12,7 @@ body {
 
 #navbar {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: black;
   padding: 50px 10px;
   transition: 0.4s;
   position: fixed;
@@ -20,11 +20,12 @@ body {
   top: 0;
   z-index: 99;
   display:inline;
+  border-bottom: 3px solid #59A9FF;
 }
 
 #navbar img {
   float: left;
-  color: black;
+  color: white;
   text-align: center;
   text-decoration: none;
   line-height: 10px;
@@ -33,15 +34,16 @@ body {
 #navbar button {
   position:relative;
   float: left;
-  color: black;
+  color: white;
+  background-color: black;
   text-align: center;
-  padding: 20px;
+  padding: 12px;
   text-decoration: none;
   font-size: 18px; 
   line-height: 40px;
   border: none;
   border-radius: 7px;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #59A9FF;
   border-bottom-left-radius: 0px 0px;
   border-bottom-right-radius: 0px 0px;
   margin-right: 20px;
@@ -55,14 +57,15 @@ body {
 }
 
 #navbar button:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #212121;
+  color: white;
 }
 #navbar img:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #212121;
+  color: white;
 }
 #navbar-right {
+  margin-top: 8px;
   float: right;
   display:inline;
   margin-right: 2%;
@@ -86,7 +89,7 @@ body {
 	margin-top:205px;
   padding:15px 15px 1000px;
   font-size:30px;
-  color: black;
+  color: white;
 }
 .tabcontent {
   display: none;
@@ -147,16 +150,18 @@ body {
 table {
   width: 100%;
 }
-#message input, label {
+.coordinatorform {
   display:block;
   margin-right: 10%;
   margin-left: 10%;
   width: 80%;
   font-size: 15px; 
 }
-/*
-Estilo da página de login
-*/
+
+p {
+  color: #b3b3b3;
+  font-weight: 300; }
+
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Roboto", sans-serif; }
@@ -262,7 +267,7 @@ h2 {
 
 .control:hover input ~ .control__indicator,
 .control input:focus ~ .control__indicator {
-  background: #ccc; }
+  background: black; }
 
 .control input:checked ~ .control__indicator {
   background: #007bff; }
@@ -288,7 +293,7 @@ h2 {
 
 .control input:checked ~ .control__indicator:after {
   display: block;
-  color: #fff; }
+  color: white; }
 
 .control--checkbox .control__indicator:after {
   top: 50%;
@@ -304,3 +309,58 @@ h2 {
 .control--checkbox input:disabled:checked ~ .control__indicator {
   background-color: #7e0cf5;
   opacity: .2; }
+
+/* Estilos para o footer */
+footer {
+  background-image: linear-gradient(to top, #59A9FF , black);
+  color: #fff;
+  padding: 20px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  flex: 1;
+}
+
+.logo img {
+  width: 300px;
+  height: auto;
+}
+
+.links {
+  margin-left: 30%;
+  flex: 2;
+  text-align: center;
+}
+
+.links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.links ul li {
+  cursor: pointer;
+  color:white;
+  display: block;
+  padding: 10px;
+  margin-right: 20px;
+}
+
+.social {
+    flex: 1;
+    text-align: right;
+}
+
+.social div {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 20px; 
+}

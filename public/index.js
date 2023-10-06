@@ -1,14 +1,42 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
-import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { firebaseConfig }  from "./firebase/firebase.js"
+import * as validator from "./validators/validator.js"
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
+const auth = getAuth();
 const dbRef = ref(db);
 updateData();
+const loginForm = {
+    email: () => document.getElementById("email"),
+    loginButton: () => document.getElementById("login-button"),
+    password: () => document.getElementById("password"),
+}
 document.getElementById("save").onclick = function() {
     saveSetPoints();
+}
+loginForm.loginButton().onclick = function() {
+    login();
+}
+loginForm.email().onchange = function() {
+    handleLoginFormChange();
+}
+loginForm.password().onchange = function() {
+    handleLoginFormChange();
+}
+function login() 
+{
+    signInWithEmailAndPassword( 
+        auth, loginForm.email().value, loginForm.password().value
+    ).then(response => 
+    {
+        console.log('Logado com sucesso!');
+    }).catch(error => 
+    {
+        alert(error.code);
+    });
 }
 function saveSetPoints()
 {
@@ -42,6 +70,10 @@ function getData(path,htmlId,htmlProperty,symbol)
     {
         console.error(error);
     });
+}
+function handleLoginFormChange()
+{
+    loginForm.loginButton().disabled = validator.validateEmail(loginForm.email().value) && validator.validatePassword(loginForm.password().value) ? false : true;
 }
 function writeSetPoints()
 {

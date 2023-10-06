@@ -8,10 +8,15 @@
   <script type="module" src="/index.js"></script>
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
   <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css" >
   <script>
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    }
+    topFunction();
     window.onscroll = function() { scrollFunction() };
     function scrollFunction() 
     {
@@ -24,7 +29,6 @@
         document.getElementById("navbar").style.padding = "50px 10px";
       }
     }
-    topFunction();
     function topFunction() 
     {
       document.documentElement.scrollTop = 0;
@@ -51,19 +55,16 @@
 <body>
   <header>
     <div id="navbar">
-      <img id="logo" class="imglogo" onclick="openPage('Inicio')" src="images/artlogo-co.png" style="width: 200px; height: 100px;"/>
+      <img id="logo"  onclick="openPage('Inicio')" src="images/artlogo-co_branco.png" style="width: 200px; height: 100px;"/>
       <div id="navbar-right">
         <button onclick="openPage('Inicio')">Início</button>
         <button onclick="openPage('CoordenadorVoo')">Coordenador de Voo</button>
         <button onclick="openPage('SobreNos')">Sobre Nós</button>
         <button onclick="openPage('Contato')">Contato</button>
-        <button onclick="openPage('Login')">Login</button>
+        <button onclick="openPage('Login')">Entrar</button>
       </div>
     </div>
   </header>
-  <footer>
-
-  </footer>
   <div class="bodycontent">
     <div id="Inicio" class="tabcontent">
       <h3>Inicio</h3>
@@ -82,32 +83,32 @@
           <table>
             <tr>
               <td>
-                <label for="humidityFrom">Humidade de:</label>
-                <input type="number" id="humidityFrom" name="humidityUpTo"><br>
+                <label class="coordinatorform" for="humidityFrom">Humidade de:</label>
+                <input class="coordinatorform" type="number" id="humidityFrom" name="humidityUpTo"><br>
               </td>
               <td>
-                <label for="humidityUpTo">Humidade até:</label>
-                <input type="number" id="humidityUpTo" name="humidityUpTo"><br>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="pressureFrom">Pressão de:</label>
-                <input type="number" id="pressureFrom" name="pressureUpTo"><br>
-              </td>
-              <td>
-                <label for="pressureUpTo">Pressão até:</label>
-                <input type="number" id="pressureUpTo" name="pressureUpTo"><br>
+                <label class="coordinatorform" for="humidityUpTo">Humidade até:</label>
+                <input class="coordinatorform" type="number" id="humidityUpTo" name="humidityUpTo"><br>
               </td>
             </tr>
             <tr>
               <td>
-                <label for="temperatureFrom">Temperatura de:</label>
-                <input type="number" id="temperatureFrom" name="temperatureUpTo"><br>
+                <label class="coordinatorform" for="pressureFrom">Pressão de:</label>
+                <input class="coordinatorform" type="number" id="pressureFrom" name="pressureUpTo"><br>
               </td>
               <td>
-                <label for="temperatureUpTo">Temperatura até:</label>
-                <input type="number" id="temperatureUpTo" name="temperatureUpTo"><br>
+                <label class="coordinatorform" for="pressureUpTo">Pressão até:</label>
+                <input class="coordinatorform" type="number" id="pressureUpTo" name="pressureUpTo"><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="coordinatorform" for="temperatureFrom">Temperatura de:</label>
+                <input class="coordinatorform" type="number" id="temperatureFrom" name="temperatureUpTo"><br>
+              </td>
+              <td>
+                <label class="coordinatorform" for="temperatureUpTo">Temperatura até:</label>
+                <input class="coordinatorform" type="number" id="temperatureUpTo" name="temperatureUpTo"><br>
               </td>
             </tr>
           </table>
@@ -130,25 +131,25 @@
           <div class="container">
             <div class="row align-items-center justify-content-center">
               <div class="col-md-7">
-                <h3>Login to <strong>Colorlib</strong></h3>
-                <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
-                <form action="#" method="post">
+                <h3>Entrar no <strong>Aeromet</strong></h3>
+                <p class="mb-4">Caso não tenha uma conta, <a href="#">clique aqui</a> e entre em contato pelos canais disponíveis.</p>
+                <form>
                   <div class="form-group first">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" placeholder="your-email@gmail.com" id="username">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" placeholder="seu-email@gmail.com" id="email">
                   </div>
                   <div class="form-group last mb-3">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Your Password" id="password">
+                    <input type="password" class="form-control" placeholder="Sua senha" id="password">
                   </div>
                   <div class="d-flex mb-5 align-items-center">
-                    <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+                    <label class="control control--checkbox mb-0"><span class="caption">Lembrar de mim</span>
                       <input type="checkbox" checked="checked"/>
                       <div class="control__indicator"></div>
                     </label>
-                    <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+                    <span class="ml-auto"><a class="forgot-pass">Esqueci a senha</a></span> 
                   </div>
-                  <input type="submit" value="Log In" class="btn btn-block btn-primary">
+                  <button type="button" id="login-button" class="btn btn-block btn-primary" disabled="true">Entrar</button>
                 </form>
               </div>
             </div>
@@ -157,6 +158,28 @@
       </div>
     </div>
   </div>
+  <footer>
+    <div class="footer-content">
+        <div class="logo">
+            <img src="images/artlogo-co_branco.png" alt="Logo da Empresa">
+        </div>
+        <div class="links">
+            <ul>
+                <li><a >Início</a></li>
+                <li><a >Coordenador de Voo</a></li>
+                <li><a >Sobre Nós</a></li>
+                <li><a >Contato</a></li>
+                <li><a >Entrar</a></li>
+                <li><a >Sair</a></li>
+                <!-- Adicione mais links úteis conforme necessário -->
+            </ul>
+        </div>
+        <div class="social">
+            <a><i class="fa fa-github" style="font-size:36px"></i></a>
+            <!-- Adicione mais ícones de redes sociais conforme necessário -->
+        </div>
+    </div>
+</footer>
 </body>
 
 </html>
