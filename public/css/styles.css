@@ -157,7 +157,15 @@ table {
   width: 80%;
   font-size: 15px; 
 }
-
+.loginButton {
+  display: block;
+}
+.logoutButton {
+  display: none;
+}
+/* 
+Styles login form
+*/
 p {
   color: #b3b3b3;
   font-weight: 300; }
@@ -348,7 +356,6 @@ footer {
 .links ul li {
   cursor: pointer;
   color:white;
-  display: block;
   padding: 10px;
   margin-right: 20px;
 }
