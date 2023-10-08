@@ -1,23 +1,44 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { firebaseConfig }  from "./firebase/firebase.js"
 import * as validator from "./validators/validator.js"
 import * as errors from "./errors/errors.js"
-
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth();
 const dbRef = ref(db);
-updateData();
 const loginForm = {
     email: () => document.getElementById("email"),
     loginButton: () => document.getElementById("login-button"),
     password: () => document.getElementById("password"),
     passwordResetButton: () => document.getElementById("recover-password-button"),
 }
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      updateData();
+      toggleButtons("logoutButton", "block");
+      toggleButtons("loginButton","none");
+      document.getElementById("Login").style.display = "none";
+      document.getElementById("CoordenadorVoo").style.display = "block";
+    } else {
+        
+    }
+  });
 document.getElementById("save").onclick = function() {
     saveSetPoints();
+}
+document.getElementById("logout-button").onclick = function() {
+    handleLogout();
+}
+document.getElementById("logout-button-list").onclick = function() {
+    handleLogout();
+}
+document.getElementById("logout-button-list").onclick = function() {
+    handleLogout();
+}
+document.getElementById("login-button").onclick = function() {
+    loading();
 }
 loginForm.passwordResetButton().onclick = function() {
     handlePasswordReset();
@@ -35,12 +56,28 @@ function handleLogin()
 {
     signInWithEmailAndPassword( 
         auth, loginForm.email().value, loginForm.password().value
-    ).then(response => 
+    ).then(() => 
     {
         alert('Logado com sucesso!');
+        toggleButtons("logoutButton", "block");
+        toggleButtons("loginButton","none");
+        document.getElementById("Login").style.display = "none";
+        document.getElementById("CoordenadorVoo").style.display = "block";
+        updateData();
     }).catch(error => 
     {
         alert(errors.mapErrorMessage(error.code));
+    });
+}
+function handleLogout()
+{
+    signOut(auth)
+    .then(() => {
+        window.location.href = "";
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Erro ao fazer logout!");
     });
 }
 function handlePasswordReset() 
@@ -49,7 +86,7 @@ function handlePasswordReset()
     {
         sendPasswordResetEmail( 
             auth, loginForm.email().value
-        ).then(response => 
+        ).then(() => 
         {
             alert('Email para reset de senha enviado com sucesso!');
         }).catch(error => 
@@ -65,7 +102,6 @@ function saveSetPoints()
 }
 function updateData()
 {
-    /*
     getData("data/humidity",'humidity','innerHTML','%');
     getData("data/pressure",'pressure','innerHTML',' hPa');
     getData("data/temperature",'temperature','innerHTML','ºC');
@@ -75,7 +111,6 @@ function updateData()
     getData("setPoints/temperatureUpTo",'temperatureUpTo','value','');
     getData("setPoints/pressureFrom",'pressureFrom','value','');
     getData("setPoints/pressureUpTo",'pressureUpTo','value','');
-    */
 }
 function getData(path,htmlId,htmlProperty,symbol) 
 {
@@ -118,4 +153,20 @@ function isEmailValid()
 function isPasswordValid()
 {
     return validator.validatePassword(loginForm.password().value);
+}
+
+function toggleButtons(className, display) 
+    {
+      var i, elements;
+      elements = document.getElementsByClassName(className);
+      for (i = 0; i < elements.length; i++) 
+      {
+        elements[i].style.display = display;
+      }
+
+    }
+function loading(){
+    window.addEventListener("load", ()=> {
+        const loader = document.querySelector(".pace")
+    })
 }

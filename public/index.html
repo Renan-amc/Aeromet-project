@@ -64,7 +64,7 @@
         <button onclick="openPage('SobreNos')">Sobre Nós</button>
         <button onclick="openPage('Contato')">Contato</button>
         <button class="loginButton" onclick="openPage('Login')">Entrar</button>
-        <button class="logoutButton">Sair</button>
+        <button id="logout-button" class="logoutButton">Sair</button>
       </div>
     </div>
   </header>
@@ -139,18 +139,18 @@
                 <form>
                   <div class="form-group first">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" placeholder="seu-email@gmail.com" id="email" onchange="validateFields()">
+                    <input type="text" class="form-control" placeholder="seu-email@gmail.com" id="email">
                   </div>
                   <div class="form-group last mb-3">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="sua-senha" id="password" onchange="validateFields()">
+                    <input type="password" class="form-control" placeholder="sua-senha" id="password">
                   </div>
                   <div class="d-flex mb-5 align-items-center">
                     <label class="control control--checkbox mb-0"><span class="caption">Lembrar de mim</span>
                       <input type="checkbox" checked="checked"/>
                       <div class="control__indicator"></div>
                     </label>
-                    <span class="ml-auto"><a id="recover-password-button" class="forgot-pass">Esqueci a senha</a></span>
+                    <span class="ml-auto"><button type="button" id='recover-password-button' class="forgot-pass" disabled="true">Esqueci a senha</button></span>
                   </div>
                   <button type="button" id="login-button" class="btn btn-block btn-primary" disabled="true">Entrar</button>
                 </form>
@@ -173,7 +173,7 @@
                 <li onclick="openPage('SobreNos')" style="display: block;"><a >Sobre Nós</a></li>
                 <li onclick="openPage('Contato')" style="display: block;"><a >Contato</a></li>
                 <li onclick="openPage('Login')" class="loginButton" style="display: block;"><a >Entrar</a></li>
-                <li onclick="" class="logoutButton"><a >Sair</a></li>
+                <li id="logout-button-list" class="logoutButton"><a >Sair</a></li>
                 <!-- Adicione mais links úteis conforme necessário -->
             </ul>
         </div>
