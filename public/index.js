@@ -1,8 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { firebaseConfig }  from "./firebase/firebase.js"
 import * as validator from "./validators/validator.js"
+import * as errors from "./errors/errors.js"
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -13,31 +14,50 @@ const loginForm = {
     email: () => document.getElementById("email"),
     loginButton: () => document.getElementById("login-button"),
     password: () => document.getElementById("password"),
+    passwordResetButton: () => document.getElementById("recover-password-button"),
 }
 document.getElementById("save").onclick = function() {
     saveSetPoints();
 }
+loginForm.passwordResetButton().onclick = function() {
+    handlePasswordReset();
+}
 loginForm.loginButton().onclick = function() {
-    login();
+    handleLogin();
 }
 loginForm.email().onchange = function() {
-    validateFields();
+    handleLoginFormChange();
 }
 loginForm.password().onchange = function() {
-    validateFields();
+    handleLoginFormChange();
 }
-function login() 
+function handleLogin()
 {
     signInWithEmailAndPassword( 
         auth, loginForm.email().value, loginForm.password().value
     ).then(response => 
     {
-        console.log('Logado com sucesso!');
-
+        alert('Logado com sucesso!');
     }).catch(error => 
     {
-        alert(error.code);
+        alert(errors.mapErrorMessage(error.code));
     });
+}
+function handlePasswordReset() 
+{   
+    if(isEmailValid())
+    {
+        sendPasswordResetEmail( 
+            auth, loginForm.email().value
+        ).then(response => 
+        {
+            alert('Email para reset de senha enviado com sucesso!');
+        }).catch(error => 
+        {
+            alert(errors.mapErrorMessage(error.code));
+        })
+    }
+    else alert(errors.mapErrorMessage('validation/email'));
 }
 function saveSetPoints()
 {
@@ -45,6 +65,7 @@ function saveSetPoints()
 }
 function updateData()
 {
+    /*
     getData("data/humidity",'humidity','innerHTML','%');
     getData("data/pressure",'pressure','innerHTML',' hPa');
     getData("data/temperature",'temperature','innerHTML','ºC');
@@ -54,6 +75,7 @@ function updateData()
     getData("setPoints/temperatureUpTo",'temperatureUpTo','value','');
     getData("setPoints/pressureFrom",'pressureFrom','value','');
     getData("setPoints/pressureUpTo",'pressureUpTo','value','');
+    */
 }
 function getData(path,htmlId,htmlProperty,symbol) 
 {
@@ -73,8 +95,8 @@ function getData(path,htmlId,htmlProperty,symbol)
     });
 }
 function handleLoginFormChange()
-{
-    loginForm.loginButton().disabled = validator.validateEmail(loginForm.email().value) && validator.validatePassword(loginForm.password().value) ? false : true;
+{   
+    loginForm.loginButton().disabled = isEmailValid() && isPasswordValid() ? false : true;
 }
 function writeSetPoints()
 {
@@ -89,29 +111,11 @@ function writeSetPoints()
     };
     return setPoints;
 }
-
-
-function validateFields() {
-    const emailValid = isEmailValid();
-    document.getElementById('recover-password-button').disabled = !emailValid;
-
-    const passwordValid = isPasswordValid();
-    document.getElementById('login-button').disabled = !emailValid || !passwordValid;
-  }
-  function isEmailValid(){
-    const email = document.getElementById("email").value;
-    if(!email){
-      return false;
-    }
-    return validateEmail(email);
-  }
-  function isPasswordValid() {
-    const password = document.getElementById('password').value;
-    if(!password){
-      return false;
-    }
-    return true;
-  }
-  function validateEmail(email) {
-    return  /\S+@\S+\.\S+/.test(email);
-  }
+function isEmailValid()
+{
+    return validator.validateEmail(loginForm.email().value);
+}
+function isPasswordValid()
+{
+    return validator.validatePassword(loginForm.password().value);
+}

@@ -51,30 +51,6 @@
       document.getElementById(pageName).style.display = "block";
       topFunction();
     }
-    function validateFields() {
-      const emailValid = isEmailValid();
-      document.getElementById('recover-password-button').disabled = !emailValid;
-
-      const passwordValid = isPasswordValid();
-      document.getElementById('login-button').disabled = !emailValid || !passwordValid;
-    }
-    function isEmailValid(){
-      const email = document.getElementById("email").value;
-      if(!email){
-        return false;
-      }
-      return validateEmail(email);
-    }
-    function isPasswordValid() {
-      const password = document.getElementById('password').value;
-      if(!password){
-        return false;
-      }
-      return true;
-    }
-    function validateEmail(email) {
-      return  /\S+@\S+\.\S+/.test(email);
-    }
   </script>
 </head>
 
@@ -174,7 +150,7 @@
                       <input type="checkbox" checked="checked"/>
                       <div class="control__indicator"></div>
                     </label>
-                    <span class="ml-auto"><button type="button" id='recover-password-button' class="forgot-pass" disabled="true">Esqueci a senha</button></span>
+                    <span class="ml-auto"><a id="recover-password-button" class="forgot-pass">Esqueci a senha</a></span>
                   </div>
                   <button type="button" id="login-button" class="btn btn-block btn-primary" disabled="true">Entrar</button>
                 </form>

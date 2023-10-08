@@ -240,6 +240,7 @@ h2 {
   padding-right: 30px; }
 
 .half .forgot-pass {
+  cursor: pointer;
   position: relative;
   top: 2px;
   font-size: 14px; }
