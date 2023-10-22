@@ -166,7 +166,4 @@ function toggleButtons(className, display)
 
     }
 function loading(){
-    window.addEventListener("load", ()=> {
-        const loader = document.querySelector(".pace")
-    })
 }
