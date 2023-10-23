@@ -1,91 +1,228 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aeromet</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.3.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.3.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.3.1/firebase-performance-compat.js"></script>
-    <script type="module" src="/index.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <title>Aeromet</title>
+  <script type="module" src="/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+  <link rel="stylesheet" href="css/center-atom.css">\
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css" >
+  <script>
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    }
+    topFunction();
+    window.onscroll = function() { scrollFunction() };
+    function scrollFunction() 
+    {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) 
+      {
+        document.getElementById("navbar").style.padding = "30px 10px";
+      } 
+      else 
+      {
+        document.getElementById("navbar").style.padding = "50px 10px";
+      }
+    }
+    function topFunction() 
+    {
+      document.documentElement.scrollTop = 0;
+    }
+    function openPage(pageName) 
+    {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) 
+      {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) 
+      {
+        tablinks[i].style.backgroundColor = "";
+      }
+      document.getElementById(pageName).style.display = "block";
+      topFunction();
+    }
+  </script>
+</head>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 425px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-      input, label {
-        display:block;
-        margin-right: 15px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>AEROMET</h2>
-      <p>Humidade Atual: <b id="humidity"></b></p>
-      <p>Presssão Atual: <b id="pressure"></b> </p>
-      <p>Temperatura Atual: <b id="temperature"></b></p>
-      <h2>Condições Meterológicas para aprovar o início do Voo</h2>
-      <br>
-      <form>
-        <table>
-          <tr>
-            <td>
-              <label for="humidityFrom">Humidade de:</label>
-              <input type="number" id="humidityFrom" name="humidityUpTo"><br>
-            </td>
-            <td>
-              <label for="humidityUpTo">Humidade até:</label>
-              <input type="number" id="humidityUpTo" name="humidityUpTo"><br>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="pressureFrom">Pressão de:</label>
-              <input type="number" id="pressureFrom" name="pressureUpTo"><br>
-            </td>
-            <td>
-              <label for="pressureUpTo">Pressão até:</label>
-              <input type="number" id="pressureUpTo" name="pressureUpTo"><br>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="temperatureFrom">Temperatura de:</label>
-              <input type="number" id="temperatureFrom" name="temperatureUpTo"><br>
-            </td>
-            <td>
-              <label for="temperatureUpTo">Temperatura até:</label>
-              <input type="number" id="temperatureUpTo" name="temperatureUpTo"><br>
-            </td>
-          </tr>
-        </table>
-        <button type="button" id="save">Salvar</button>
-      </form>
+<body>
+  <header>
+    <div id="navbar">
+      <img id="logo" onclick="openPage('Inicio')" src="images/artlogo-co_branco.png" style="width: 200px; height: 100px;"/>
+      <div id="navbar-right">
+        <button onclick="openPage('Inicio')">Início</button>
+        <button class="logoutButton" onclick="openPage('CoordenadorVoo')">Coordenador de Voo</button>
+        <button onclick="openPage('SobreNos')">Sobre Nós</button>
+        <button onclick="openPage('Contato')">Contato</button>
+        <button class="loginButton" onclick="openPage('Login')">Entrar</button>
+        <button id="logout-button" class="logoutButton">Sair</button>
+      </div>
     </div>
-  </body>
+  </header>
+  <div class="bodycontent">
+    <div id="Inicio" class="tabcontent">
+      <h3>Inicio</h3>
+      <p>O Aeromet é um software de sensoriamento e controle para aeronaves que realizam taxi aéreo. </p>
+      <br>
+      <p>O sistema garante que a aeronave só poderá decolar dentro da faixa permitida pela Coordenação </p> 
+      <p>de Voo que gerencia as faixas de <b>humidade, pressão e temperatura</b> que sua aeronave pode decolar.</p>
+    </div>
+    <div id="CoordenadorVoo" class="tabcontent">
+      <div class="wrapper">
+        <form action="">
+          <div class="input-global">
+            <div class="title">
+              <p>Aeromet</p>
+            </div>
+            <div class="Box3">
+              <div class="input-box">
+                <input type="text" id="humidity" placeholder="Humidade Atual" required disabled>
+                <i class="measure">%</i>
+                <i class='bx bx-water'></i>
+              </div>
+              <div class="input-box">
+                <input type="text" id="temperature" placeholder="Temperatura Atual" required disabled>
+                <i class="measure">ºC</i>
+                <i class='bx bxs-hot'></i>
+              </div>
+              <div class="input-box">
+                <input type="text" id="pressure" placeholder="Pressão Atual" required disabled>
+                <i class="measure">hPa</i>
+                <i class='bx bx-slider-alt'></i>
+              </div>
+            </div>
+            <div class="title">
+              <p>Condições Meterológicas para aprovar o início do Voo</p>
+            </div>
+            <div class="Box1">
+              <p>Mínimo</p>
+              <div class="input-box">
+                <input  type="number" id="humidityFrom" placeholder="Humidade" required>
+                <i class="measure">%</i>
+                <i class='bx bx-water'></i>
+              </div>
+              <div class="input-box">
+                <input type="number" id="temperatureFrom" placeholder="Temperatura" required>
+                <i class="measure">ºC</i>
+                <i class='bx bxs-hot'></i>
+              </div>
+              <div class="input-box">
+                <input type="number" id="pressureFrom" placeholder="Pressão" required>
+                <i class="measure">hPa</i>
+                <i class='bx bx-slider-alt'></i>
+              </div>
+            </div>
+            <div class="Box2">
+              <p>Máximo</p>
+              <div class="input-box">
+                <input type="number" id="humidityUpTo" placeholder="Humidade" required>
+                <i class="measure">%</i>
+                <i class='bx bx-water'></i>
+              </div>
+              <div class="input-box">
+                <input type="number" id="temperatureUpTo" placeholder="Temperatura" required>
+                <i class="measure">ºC</i>
+                <i class='bx bxs-hot'></i>
+              </div>
+              <div class="input-box">
+                <input type="number" id="pressureUpTo" placeholder="Pressão" required>
+                <i class="measure">ºC</i>
+                <i class='bx bx-slider-alt'></i>
+              </div>
+            </div>
+            <div class="Box3">
+              <div class="input-box">
+                <button class="btn btn-block btn-primary" type="button" id="save">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="SobreNos" class="tabcontent">
+      <h3>Sobre Nós</h3>
+      <p>Diante das recentes mudanças climáticas, se faz cada vez mais necessário possuir algum meio de medir as variações do </p>
+      <p>tempo com maior precisão e em tempo real, para que essas informações possam ser acessadas por meio da internet.</p>
+      <br>
+      <p>Portanto, o objetivo do projeto é a construção de uma estação meteorológica, que capte os dados em tempo </p>
+      <p>real e os transfira na nuvem para serem acessados remotamente e interpretados com maior facilidade.</p>
+      <br>
+      <p>Nosso projeto se aplica dentro de um contexto de taxi aéreo, a ideia é utilizar sensores para medir a temperatura, </p>
+      <p>umidade e pressão no momento que o voo será realizado para conferir sua viabilidade perante as variações do tempo.</p>
+    </div>
+    <div id="Contato" class="tabcontent">
+      <h3>Contato</h3>
+      <p>Caso tenha alguma dúvida ou deseja começar utilizar o nosso sistema, apresente sua demanda e solicite um usuário.</p>
+      <p>Entre em contato pelas seguintes maneiras:</p>
+      <p>Email: aerometproject@gmail.com</p>
+      <br>
+    </div>
+    <div id="Login" class="tabcontent">
+      <div class="d-lg-flex half">
+        <div class="bg order-1 order-md-2" style="background-image: url('images/helicopter-1.jpg');"></div>
+        <div class="contents order-2 order-md-1">
+          <div class="container">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-7">
+                <h3>Entrar no <strong>Aeromet</strong></h3>
+                <p class="mb-4">Caso não tenha uma conta, <a onclick="openPage('Contato')" style="cursor: pointer"><u>clique aqui</u></a> e entre em contato pelos canais disponíveis.</p>
+                <form>
+                  <div class="form-group first">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" placeholder="seu-email@gmail.com" id="email">
+                  </div>
+                  <div class="form-group last mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" placeholder="sua-senha" id="password">
+                  </div>
+                  <div class="d-flex mb-5 align-items-center">
+                    <label class="control control--checkbox mb-0"><span class="caption">Lembrar de mim</span>
+                      <input type="checkbox" checked="checked"/>
+                      <div class="control__indicator"></div>
+                    </label>
+                    <span class="ml-auto"><button type="button" id='recover-password-button' class="forgot-pass" disabled="true">Esqueci a senha</button></span>
+                  </div>
+                  <button type="button" id="login-button" class="btn btn-block btn-primary" disabled="true">Entrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-content">
+        <div class="logo">
+            <img src="images/artlogo-co_branco.png" alt="Logo da Empresa">
+        </div>
+        <div class="links">
+            <ul>
+                <li onclick="openPage('Inicio')" style="display: block;"><a >Início</a></li>
+                <li onclick="openPage('CoordenadorVoo')" class="logoutButton" ><a >Coordenador de Voo</a></li>
+                <li onclick="openPage('SobreNos')" style="display: block;"><a >Sobre Nós</a></li>
+                <li onclick="openPage('Contato')" style="display: block;"><a >Contato</a></li>
+                <li onclick="openPage('Login')" class="loginButton" style="display: block;"><a >Entrar</a></li>
+                <li id="logout-button-list" class="logoutButton"><a >Sair</a></li>
+                <!-- Adicione mais links úteis conforme necessário -->
+            </ul>
+        </div>
+        <div class="social">
+            <a href="https://github.com/Renan-amc/Aeromet-project" style="color: white"><i class="fa fa-github" style="font-size:36px"></i></a>
+            <!-- Adicione mais ícones de redes sociais conforme necessário -->
+        </div>
+    </div>
+</footer>
+</body>
+
 </html>
