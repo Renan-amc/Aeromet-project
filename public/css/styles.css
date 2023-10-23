@@ -1,6 +1,8 @@
 * {box-sizing: border-box;}
 
 body {
+  position: relative;
+  min-height: 100vh;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: black; 
@@ -70,32 +72,119 @@ body {
   display:inline;
   margin-right: 2%;
 }
-
-@media screen and (max-width: 580px) {
-  #navbar {
-    padding: 20px 10px !important;
-  }
-  #navbar button {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-  }
-  #navbar-right {
-    float: none;
-  }
-}
 .bodycontent {
-	margin-top:205px;
-  padding:15px 15px 1000px;
+  margin-top:205px;
+  padding:15px 15px;
   font-size:30px;
   color: white;
 }
 .tabcontent {
+  position: relative;
+  margin-bottom: 275px;
   display: none;
   padding: 10px 20px;
   height: 100%;
 }
+/*FORMULÁRIO */
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('../images/form_tec.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.input-global {
+  border: 2px solid rgba(69, 69, 69, 0.8);
+  background-color: transparent;
+  width: 70%;
+  text-align: center;
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.Box1, .Box2 {
+  width: 25%;
+  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+}
+
+.Box3 {
+  width: 100%;
+  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 2.5%;
+  margin-left: 1.5%;
+}
+
+.Box3 .input-box {
+  width: 20%;
+  min-width: 200px;
+  display: inline-block;
+  margin-right: 2.5%;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  margin: 30px 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(69, 69, 69, 0.8);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff; 
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: #fff; 
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.wrapper p {
+  text-align: center;
+  color: #fff;
+  margin: 50px 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.wrapper .title p {
+  font-size: 30px;
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+.measure {
+  margin-right: 15%;
+}
+/*FORMULÁRIO */
 
 #Inicio {
 	display: block;
@@ -151,31 +240,10 @@ h2 {
   font-size: 20px; }
 
 .half, .half .container > .row {
-  height: 100vh; }
-
-@media (max-width: 991.98px) {
-  .half .bg {
-    height: 500px; } 
-  .Box1, .Box2 {
-    width: 70%;
-  }
-  .Box3 .input-box {
-    width: 70%;
-  }
-}
-@media (min-width: 991.98px) {
-  .Box1, .Box2 {
-    width: 25%;
-  }
-  .Box3 .input-box {
-    width: 20%;
-  }
-}
+  height: 75vh; }
 .half .contents, .half .bg {
-  width: 50%; }
-  @media (max-width: 1199.98px) {
-    .half .contents, .half .bg {
-      width: 100%; } }
+  margin-left: 7.5%;
+  width: 35%; }
   .half .contents .form-group, .half .bg .form-group {
     margin-bottom: 0;
     border: 1px solid #efefef;
@@ -221,6 +289,46 @@ h2 {
   position: relative;
   top: 2px;
   font-size: 14px; }
+@media (max-width: 1199.98px) {
+  .half .contents, .half .bg {
+    margin-left: 0%;
+    width: 100%; } 
+  .Box3 .input-box {
+    width: 90%;
+  }
+  .input-global {
+    top: 64%;
+  }
+}
+@media (max-width: 991.98px) {
+  #navbar {
+    padding: 20px 10px !important;
+  }
+  #navbar button {
+    float: none;
+    text-align: left;
+    width: 100%;
+  }
+  #navbar-right {
+    float: none;
+  }
+  .bodycontent {
+    margin-top: 500px;
+  }
+  .half .bg {
+    height: 500px; 
+  }
+  .input-global {
+    width: 90%;
+    top: 84%;
+  }
+  .Box1, .Box2 {
+    width: 90%;
+  }
+  .tabcontent {
+    margin-bottom: 700px;
+  }
+}
 
 .control {
   display: block;
@@ -298,6 +406,10 @@ h2 {
 
 /* Estilos para o footer */
 footer {
+  height: 250px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
   background-image: linear-gradient(to top, #59A9FF , black);
   color: #fff;
   padding: 20px 0;
@@ -307,7 +419,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 70%;
   margin: 0 auto;
 }
 
@@ -316,7 +428,8 @@ footer {
 }
 
 .logo img {
-  width: 300px;
+  width: 200%;
+  max-width: 300px;
   height: auto;
 }
 
@@ -349,101 +462,3 @@ footer {
     margin-left: 20px;
     font-size: 20px; 
 }
-
-/*FORMULÁRIO */
-.wrapper {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-image: url('../images/form_tec.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.input-global {
-  border: 2px solid rgba(69, 69, 69, 0.8);
-  background-color: transparent;
-  width: 70%;
-  text-align: center;
-  border-radius: 10px;
-  padding: 30px 40px;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.Box1, .Box2 {
-  color: #fff;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 2.5%;
-  margin-left: 2.5%;
-}
-
-.Box3 {
-  width: 100%;
-  color: #fff;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 2.5%;
-  margin-left: 1.5%;
-}
-
-.Box3 .input-box {
-  display: inline-block;
-  margin-right: 2.5%;
-}
-
-.input-box {
-  position: relative;
-  width: 100%;
-  height: 70px;
-  margin: 30px 0;
-}
-
-.input-box input {
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  border: 2px solid rgba(69, 69, 69, 0.8);
-  border-radius: 40px;
-  font-size: 16px;
-  color: #fff; 
-  padding: 20px 45px 20px 20px;
-}
-
-.input-box input::placeholder {
-  color: #fff; 
-}
-
-.input-box i {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-}
-
-.wrapper p {
-  text-align: center;
-  color: #fff;
-  margin: 50px 0;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.wrapper .title p {
-  font-size: 30px;
-  border-bottom: 2px solid rgba(255,255,255,0.2);
-}
-.measure {
-  margin-right: 15%;
-}
-/*FORMULÁRIO */
