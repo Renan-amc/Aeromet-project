@@ -89,7 +89,7 @@ body {
 .wrapper {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-image: url('../images/form_tec.jpg');
   background-size: cover;
   background-position: center;
@@ -103,10 +103,6 @@ body {
   border-radius: 10px;
   padding: 30px 40px;
   margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: #fff; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
@@ -239,37 +235,36 @@ a {
 h2 {
   font-size: 20px; }
 
-.half, .half .container > .row {
-  height: 75vh; }
 .half .contents, .half .bg {
+  margin-top: 30px;
   margin-left: 7.5%;
   width: 35%; }
-  .half .contents .form-group, .half .bg .form-group {
-    margin-bottom: 0;
-    border: 1px solid #efefef;
-    padding: 15px 15px;
-    border-bottom: none; }
-    .half .contents .form-group.first, .half .bg .form-group.first {
-      border-top-left-radius: 7px;
-      border-top-right-radius: 7px; }
-    .half .contents .form-group.last, .half .bg .form-group.last {
-      border-bottom: 1px solid #efefef;
-      border-bottom-left-radius: 7px;
-      border-bottom-right-radius: 7px; }
-    .half .contents .form-group label, .half .bg .form-group label {
-      font-size: 12px;
-      display: block;
-      margin-bottom: 0;
-      color: #b3b3b3; }
-  .half .contents .form-control, .half .bg .form-control {
-    border: none;
-    padding: 0;
-    font-size: 20px;
-    border-radius: 0; }
-    .half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
-      outline: none;
-      -webkit-box-shadow: none;
-      box-shadow: none; }
+.half .contents .form-group, .half .bg .form-group {
+  margin-bottom: 0;
+  border: 1px solid #efefef;
+  padding: 15px 15px;
+  border-bottom: none; }
+.half .contents .form-group.first, .half .bg .form-group.first {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px; }
+.half .contents .form-group.last, .half .bg .form-group.last {
+  border-bottom: 1px solid #efefef;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px; }
+.half .contents .form-group label, .half .bg .form-group label {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 0;
+  color: #b3b3b3; }
+.half .contents .form-control, .half .bg .form-control {
+  border: none;
+  padding: 0;
+  font-size: 20px;
+  border-radius: 0; }
+.half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
 
 .half .bg {
   background-size: cover;
@@ -296,9 +291,6 @@ h2 {
   .Box3 .input-box {
     width: 90%;
   }
-  .input-global {
-    top: 64%;
-  }
 }
 @media (max-width: 991.98px) {
   #navbar {
@@ -316,17 +308,13 @@ h2 {
     margin-top: 500px;
   }
   .half .bg {
-    height: 500px; 
+    height: 1000px; 
   }
   .input-global {
     width: 90%;
-    top: 84%;
   }
   .Box1, .Box2 {
     width: 90%;
-  }
-  .tabcontent {
-    margin-bottom: 700px;
   }
 }
 
@@ -406,7 +394,6 @@ h2 {
 
 /* Estilos para o footer */
 footer {
-  height: 250px;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -420,7 +407,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   max-width: 70%;
-  margin: 0 auto;
+  margin: auto auto;
 }
 
 .logo {
