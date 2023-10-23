@@ -64,6 +64,7 @@ function handleLogin()
         toggleButtons("loginButton","none");
         document.getElementById("Login").style.display = "none";
         document.getElementById("CoordenadorVoo").style.display = "block";
+        document.documentElement.scrollTop = 0;
         updateData();
     }).catch(error => 
     {

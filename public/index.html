@@ -26,10 +26,20 @@
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) 
       {
         document.getElementById("navbar").style.padding = "30px 10px";
+        if(window.innerWidth < 991.98)
+        {
+          document.getElementById("navbar-right").style.display = "none";
+          document.getElementById("bodycontent").style["margin-top"] = "225px";
+        }
       } 
       else 
       {
         document.getElementById("navbar").style.padding = "50px 10px";
+        if(window.innerWidth < 991.98)
+        {
+          document.getElementById("navbar-right").style.display = "inline";
+          document.getElementById("bodycontent").style["margin-top"] = "500px";
+        }
       }
     }
     function topFunction() 
@@ -69,7 +79,7 @@
       </div>
     </div>
   </header>
-  <div class="bodycontent">
+  <div id="bodycontent" class="bodycontent">
     <div id="Inicio" class="tabcontent">
       <h3>Inicio</h3>
       <p>O Aeromet é um software de sensoriamento e controle para aeronaves que realizam taxi aéreo. </p>
