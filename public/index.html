@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/center-atom.css">\
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
   <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -74,48 +75,74 @@
       <p>Home is where the heart is..</p>
     </div>
     <div id="CoordenadorVoo" class="tabcontent">
-      <h3>Coordenador de Voo</h3>
-      <div id="message">
-        <h2>AEROMET</h2>
-        <p>Humidade Atual: <b id="humidity"></b></p>
-        <p>Presssão Atual: <b id="pressure"></b> </p>
-        <p>Temperatura Atual: <b id="temperature"></b></p>
-        <h2>Condições Meterológicas para aprovar o início do Voo</h2>
-        <br>
-        <form>
-          <table>
-            <tr>
-              <td>
-                <label class="coordinatorform" for="humidityFrom">Humidade de:</label>
-                <input class="coordinatorform" type="number" id="humidityFrom" name="humidityUpTo"><br>
-              </td>
-              <td>
-                <label class="coordinatorform" for="humidityUpTo">Humidade até:</label>
-                <input class="coordinatorform" type="number" id="humidityUpTo" name="humidityUpTo"><br>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="coordinatorform" for="pressureFrom">Pressão de:</label>
-                <input class="coordinatorform" type="number" id="pressureFrom" name="pressureUpTo"><br>
-              </td>
-              <td>
-                <label class="coordinatorform" for="pressureUpTo">Pressão até:</label>
-                <input class="coordinatorform" type="number" id="pressureUpTo" name="pressureUpTo"><br>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="coordinatorform" for="temperatureFrom">Temperatura de:</label>
-                <input class="coordinatorform" type="number" id="temperatureFrom" name="temperatureUpTo"><br>
-              </td>
-              <td>
-                <label class="coordinatorform" for="temperatureUpTo">Temperatura até:</label>
-                <input class="coordinatorform" type="number" id="temperatureUpTo" name="temperatureUpTo"><br>
-              </td>
-            </tr>
-          </table>
-          <button type="button" id="save">Salvar</button>
+      <div class="wrapper">
+        <form action="">
+          <div class="input-global">
+            <div class="title">
+              <p>Aeromet</p>
+            </div>
+            <div class="Box3">
+              <div class="input-box">
+                <input type="text" id="humidity" placeholder="Humidade Atual" required disabled>
+                <i class="measure">%</i>
+                <i class='bx bx-water'></i>
+              </div>
+              <div class="input-box">
+                <input type="text" id="temperature" placeholder="Temperatura Atual" required disabled>
+                <i class="measure">ºC</i>
+                <i class='bx bxs-hot'></i>
+              </div>
+              <div class="input-box">
+                <input type="text" id="pressure" placeholder="Pressão Atual" required disabled>
+                <i class="measure">hPa</i>
+                <i class='bx bx-slider-alt'></i>
+              </div>
+            </div>
+            <div class="title">
+              <p>Condições Meterológicas para aprovar o início do Voo</p>
+            </div>
+            <div class="Box1">
+              <p>Mínimo</p>
+              <div class="input-box">
+                <input  type="number" id="humidityFrom" placeholder="Humidade" required>
+                <i class="measure">%</i>
+                <i class='bx bx-water'></i>
+              </div>
+              <div class="input-box">
+                <input type="number" id="temperatureFrom" placeholder="Temperatura" required>
+                <i class="measure">ºC</i>
+                <i class='bx bxs-hot'></i>
+              </div>
+              <div class="input-box">
+                <input type="number" id="pressureFrom" placeholder="Pressão" required>
+                <i class="measure">hPa</i>
+                <i class='bx bx-slider-alt'></i>
+              </div>
+            </div>
+            <div class="Box2">
+              <p>Máximo</p>
+              <div class="input-box">
+                <input type="number" id="humidityUpTo" placeholder="Humidade" required>
+                <i class="measure">%</i>
+                <i class='bx bx-water'></i>
+              </div>
+              <div class="input-box">
+                <input type="number" id="temperatureUpTo" placeholder="Temperatura" required>
+                <i class="measure">ºC</i>
+                <i class='bx bxs-hot'></i>
+              </div>
+              <div class="input-box">
+                <input type="number" id="pressureUpTo" placeholder="Pressão" required>
+                <i class="measure">ºC</i>
+                <i class='bx bx-slider-alt'></i>
+              </div>
+            </div>
+            <div class="Box3">
+              <div class="input-box">
+                <button class="btn btn-block btn-primary" type="button" id="save">Salvar</button>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>

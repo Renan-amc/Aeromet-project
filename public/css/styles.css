@@ -105,43 +105,6 @@ body {
 #Contato {}
 #Login {}
 
-#message { 
-  background: white; 
-  max-width: 60%; 
-  margin: 100px auto 16px; 
-  padding: 32px 24px; 
-  border-radius: 3px; 
-}
-#message h2 { 
-  color: #ffa100; 
-  font-weight: bold; 
-  font-size: 16px; 
-  margin: 0 0 8px;
- }
-#message h1 { 
-  font-size: 22px; 
-  font-weight: 300; 
-  color: rgba(0,0,0,0.6); 
-  margin: 0 0 16px;
-}
-#message p { 
-  line-height: 140%; 
-  margin: 16px 0 24px; 
-  font-size: 14px;
- }
-#message a { 
-  display: block; 
-  text-align: center; 
-  background: #039be5; 
-  text-transform: uppercase; 
-  text-decoration: none; 
-  color: white; 
-  padding: 16px; 
-  border-radius: 4px; 
-}
-#message, #message a { 
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
-}
 #load { 
   color: rgba(0,0,0,0.4); 
   text-align: center; 
@@ -192,8 +155,22 @@ h2 {
 
 @media (max-width: 991.98px) {
   .half .bg {
-    height: 500px; } }
-
+    height: 500px; } 
+  .Box1, .Box2 {
+    width: 70%;
+  }
+  .Box3 .input-box {
+    width: 70%;
+  }
+}
+@media (min-width: 991.98px) {
+  .Box1, .Box2 {
+    width: 25%;
+  }
+  .Box3 .input-box {
+    width: 20%;
+  }
+}
 .half .contents, .half .bg {
   width: 50%; }
   @media (max-width: 1199.98px) {
@@ -373,3 +350,100 @@ footer {
     font-size: 20px; 
 }
 
+/*FORMULÁRIO */
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('../images/form_tec.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.input-global {
+  border: 2px solid rgba(69, 69, 69, 0.8);
+  background-color: transparent;
+  width: 70%;
+  text-align: center;
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.Box1, .Box2 {
+  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+}
+
+.Box3 {
+  width: 100%;
+  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 2.5%;
+  margin-left: 1.5%;
+}
+
+.Box3 .input-box {
+  display: inline-block;
+  margin-right: 2.5%;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  margin: 30px 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(69, 69, 69, 0.8);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff; 
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: #fff; 
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.wrapper p {
+  text-align: center;
+  color: #fff;
+  margin: 50px 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.wrapper .title p {
+  font-size: 30px;
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+.measure {
+  margin-right: 15%;
+}
+/*FORMULÁRIO */

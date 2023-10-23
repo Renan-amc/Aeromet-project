@@ -20,6 +20,7 @@ onAuthStateChanged(auth, (user) => {
       toggleButtons("logoutButton", "block");
       toggleButtons("loginButton","none");
       document.getElementById("Login").style.display = "none";
+      document.getElementById("Inicio").style.display = "none";
       document.getElementById("CoordenadorVoo").style.display = "block";
     } else {
         
@@ -102,23 +103,23 @@ function saveSetPoints()
 }
 function updateData()
 {
-    getData("data/humidity",'humidity','innerHTML','%');
-    getData("data/pressure",'pressure','innerHTML',' hPa');
-    getData("data/temperature",'temperature','innerHTML','ºC');
-    getData("setPoints/humidityFrom",'humidityFrom','value','');
-    getData("setPoints/humidityUpTo",'humidityUpTo','value','');
-    getData("setPoints/temperatureFrom",'temperatureFrom','value','');
-    getData("setPoints/temperatureUpTo",'temperatureUpTo','value','');
-    getData("setPoints/pressureFrom",'pressureFrom','value','');
-    getData("setPoints/pressureUpTo",'pressureUpTo','value','');
+    getData("data/humidity",'humidity','value');
+    getData("data/pressure",'pressure','value');
+    getData("data/temperature",'temperature','value');
+    getData("setPoints/humidityFrom",'humidityFrom','value');
+    getData("setPoints/humidityUpTo",'humidityUpTo','value');
+    getData("setPoints/temperatureFrom",'temperatureFrom','value');
+    getData("setPoints/temperatureUpTo",'temperatureUpTo','value');
+    getData("setPoints/pressureFrom",'pressureFrom','value');
+    getData("setPoints/pressureUpTo",'pressureUpTo','value');
 }
-function getData(path,htmlId,htmlProperty,symbol) 
+function getData(path,htmlId,htmlProperty) 
 {
     get(child(dbRef, path)).then((snapshot) => 
     {
         if (snapshot.exists()) 
         {
-            document.getElementById(htmlId)[htmlProperty] = snapshot.val() + symbol;
+            document.getElementById(htmlId)[htmlProperty] = snapshot.val();
         } 
         else 
         {
