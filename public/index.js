@@ -168,4 +168,5 @@ function toggleButtons(className, display)
 
     }
 function loading(){
+    
 }
