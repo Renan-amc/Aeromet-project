@@ -23,6 +23,7 @@ onAuthStateChanged(auth, (user) => {
       document.getElementById("Login").style.display = "none";
       document.getElementById("Inicio").style.display = "none";
       document.getElementById("CoordenadorVoo").style.display = "block";
+      refreshData();
     } else {
         
     }
@@ -89,7 +90,7 @@ function handlePasswordReset()
             auth, loginForm.email().value
         ).then(() => 
         {
-            alert('Email para reset de senha enviado com sucesso!');
+            alert('Email para alteração de senha enviado com sucesso!');
         }).catch(error => 
         {
             alert(errors.mapErrorMessage(error.code));
@@ -100,6 +101,12 @@ function handlePasswordReset()
 function saveSetPoints()
 {
     set(ref(db, 'setPoints'), writeSetPoints());
+}
+function refreshData() {
+    if (!window.intervalID) {
+        window.intervalID = setInterval(updateData, 2000);
+      }
+   
 }
 function updateData()
 {
