@@ -1,9 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-import { firebaseConfig }  from "./firebase/firebase.js"
-import * as validator from "./validators/validator.js"
-import * as errors from "./errors/errors.js"
+import { firebaseConfig }  from "./firebase/firebase.js";
+import * as validator from "./validators/validator.js";
+import * as errors from "./errors/errors.js";
+import * as preloader from "./preloaders/preloader.js";
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth();
@@ -38,14 +39,12 @@ document.getElementById("logout-button-list").onclick = function() {
 document.getElementById("logout-button-list").onclick = function() {
     handleLogout();
 }
-document.getElementById("login-button").onclick = function() {
-    loading();
-}
 loginForm.passwordResetButton().onclick = function() {
     handlePasswordReset();
 }
 loginForm.loginButton().onclick = function() {
     handleLogin();
+    loading();
 }
 loginForm.email().onchange = function() {
     handleLoginFormChange();
@@ -58,8 +57,8 @@ function handleLogin()
     signInWithEmailAndPassword( 
         auth, loginForm.email().value, loginForm.password().value
     ).then(() => 
-    {
-        alert('Logado com sucesso!');
+    {``
+        preloader.hideloading();
         toggleButtons("logoutButton", "block");
         toggleButtons("loginButton","none");
         document.getElementById("Login").style.display = "none";
@@ -168,5 +167,5 @@ function toggleButtons(className, display)
 
     }
 function loading(){
-    
+    preloader.showLoading();
 }
