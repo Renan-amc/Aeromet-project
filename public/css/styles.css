@@ -319,6 +319,7 @@ h2 {
   }
   .input-global {
     width: 90%;
+    backdrop-filter: blur(10px);
   }
   .Box1, .Box2 {
     width: 90%;
