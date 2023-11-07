@@ -1,9 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-import { firebaseConfig }  from "./firebase/firebase.js"
-import * as validator from "./validators/validator.js"
-import * as errors from "./errors/errors.js"
+import { firebaseConfig }  from "./firebase/firebase.js";
+import * as validator from "./validators/validator.js";
+import * as errors from "./errors/errors.js";
+import * as preloader from "./preloaders/preloader.js";
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth();
@@ -17,17 +19,18 @@ const loginForm = {
 onAuthStateChanged(auth, (user) => {
     if (user) {
       updateData();
+      updateFormData();
       toggleButtons("logoutButton", "block");
       toggleButtons("loginButton","none");
       document.getElementById("Login").style.display = "none";
       document.getElementById("Inicio").style.display = "none";
       document.getElementById("CoordenadorVoo").style.display = "block";
-    } else {
-        
+      refreshData();
     }
   });
 document.getElementById("save").onclick = function() {
     saveSetPoints();
+    loading();
 }
 document.getElementById("logout-button").onclick = function() {
     handleLogout();
@@ -38,14 +41,12 @@ document.getElementById("logout-button-list").onclick = function() {
 document.getElementById("logout-button-list").onclick = function() {
     handleLogout();
 }
-document.getElementById("login-button").onclick = function() {
-    loading();
-}
 loginForm.passwordResetButton().onclick = function() {
     handlePasswordReset();
 }
 loginForm.loginButton().onclick = function() {
     handleLogin();
+    loading();
 }
 loginForm.email().onchange = function() {
     handleLoginFormChange();
@@ -59,13 +60,14 @@ function handleLogin()
         auth, loginForm.email().value, loginForm.password().value
     ).then(() => 
     {
-        alert('Logado com sucesso!');
+        preloader.hideloading();
         toggleButtons("logoutButton", "block");
         toggleButtons("loginButton","none");
         document.getElementById("Login").style.display = "none";
         document.getElementById("CoordenadorVoo").style.display = "block";
         document.documentElement.scrollTop = 0;
         updateData();
+        updateFormData();
     }).catch(error => 
     {
         alert(errors.mapErrorMessage(error.code));
@@ -90,7 +92,7 @@ function handlePasswordReset()
             auth, loginForm.email().value
         ).then(() => 
         {
-            alert('Email para reset de senha enviado com sucesso!');
+            alert('Email para alteração de senha enviado com sucesso!');
         }).catch(error => 
         {
             alert(errors.mapErrorMessage(error.code));
@@ -98,15 +100,24 @@ function handlePasswordReset()
     }
     else alert(errors.mapErrorMessage('validation/email'));
 }
-function saveSetPoints()
+async function saveSetPoints()
 {
-    set(ref(db, 'setPoints'), writeSetPoints());
+    await set(ref(db, 'setPoints'), writeSetPoints());
+    preloader.hideloading();
+}
+function refreshData() {
+    if (!window.intervalID) {
+        window.intervalID = setInterval(updateData, 10000);
+    }
 }
 function updateData()
 {
     getData("data/humidity",'humidity','value');
     getData("data/pressure",'pressure','value');
     getData("data/temperature",'temperature','value');
+}
+function updateFormData()
+{
     getData("setPoints/humidityFrom",'humidityFrom','value');
     getData("setPoints/humidityUpTo",'humidityUpTo','value');
     getData("setPoints/temperatureFrom",'temperatureFrom','value');
@@ -132,7 +143,7 @@ function getData(path,htmlId,htmlProperty)
     });
 }
 function handleLoginFormChange()
-{   
+{
     loginForm.loginButton().disabled = isEmailValid() && isPasswordValid() ? false : true;
 }
 function writeSetPoints()
@@ -156,19 +167,15 @@ function isPasswordValid()
 {
     return validator.validatePassword(loginForm.password().value);
 }
-
 function toggleButtons(className, display) 
+{
+    var i, elements;
+    elements = document.getElementsByClassName(className);
+    for (i = 0; i < elements.length; i++) 
     {
-      var i, elements;
-      elements = document.getElementsByClassName(className);
-      for (i = 0; i < elements.length; i++) 
-      {
-        elements[i].style.display = display;
-      }
-
+    elements[i].style.display = display;
     }
-function loading(){
-    window.addEventListener("load", ()=> {
-        const loader = document.querySelector(".pace")
-    })
+}
+function loading() {
+    preloader.showLoading();
 }
