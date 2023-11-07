@@ -89,10 +89,14 @@ body {
 .wrapper {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: 125vh;
   background-image: url('../images/helicopter-2.jpg');
   background-size: cover;
   background-position: center;
+}
+
+#coordinatorForm {
+  padding-top: 10vh;
 }
 
 .input-global {
@@ -309,6 +313,9 @@ h2 {
   }
   .half .bg {
     height: 1000px; 
+  }
+  .wrapper {
+    padding-bottom: 10vh;
   }
   .input-global {
     width: 90%;

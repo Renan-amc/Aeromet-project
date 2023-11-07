@@ -5,6 +5,7 @@ import { firebaseConfig }  from "./firebase/firebase.js";
 import * as validator from "./validators/validator.js";
 import * as errors from "./errors/errors.js";
 import * as preloader from "./preloaders/preloader.js";
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth();
@@ -18,18 +19,18 @@ const loginForm = {
 onAuthStateChanged(auth, (user) => {
     if (user) {
       updateData();
+      updateFormData();
       toggleButtons("logoutButton", "block");
       toggleButtons("loginButton","none");
       document.getElementById("Login").style.display = "none";
       document.getElementById("Inicio").style.display = "none";
       document.getElementById("CoordenadorVoo").style.display = "block";
       refreshData();
-    } else {
-        
     }
   });
 document.getElementById("save").onclick = function() {
     saveSetPoints();
+    loading();
 }
 document.getElementById("logout-button").onclick = function() {
     handleLogout();
@@ -58,7 +59,7 @@ function handleLogin()
     signInWithEmailAndPassword( 
         auth, loginForm.email().value, loginForm.password().value
     ).then(() => 
-    {``
+    {
         preloader.hideloading();
         toggleButtons("logoutButton", "block");
         toggleButtons("loginButton","none");
@@ -66,6 +67,7 @@ function handleLogin()
         document.getElementById("CoordenadorVoo").style.display = "block";
         document.documentElement.scrollTop = 0;
         updateData();
+        updateFormData();
     }).catch(error => 
     {
         alert(errors.mapErrorMessage(error.code));
@@ -98,21 +100,24 @@ function handlePasswordReset()
     }
     else alert(errors.mapErrorMessage('validation/email'));
 }
-function saveSetPoints()
+async function saveSetPoints()
 {
-    set(ref(db, 'setPoints'), writeSetPoints());
+    await set(ref(db, 'setPoints'), writeSetPoints());
+    preloader.hideloading();
 }
 function refreshData() {
     if (!window.intervalID) {
-        window.intervalID = setInterval(updateData, 2000);
-      }
-   
+        window.intervalID = setInterval(updateData, 10000);
+    }
 }
 function updateData()
 {
     getData("data/humidity",'humidity','value');
     getData("data/pressure",'pressure','value');
     getData("data/temperature",'temperature','value');
+}
+function updateFormData()
+{
     getData("setPoints/humidityFrom",'humidityFrom','value');
     getData("setPoints/humidityUpTo",'humidityUpTo','value');
     getData("setPoints/temperatureFrom",'temperatureFrom','value');
@@ -138,7 +143,7 @@ function getData(path,htmlId,htmlProperty)
     });
 }
 function handleLoginFormChange()
-{   
+{
     loginForm.loginButton().disabled = isEmailValid() && isPasswordValid() ? false : true;
 }
 function writeSetPoints()
@@ -162,17 +167,15 @@ function isPasswordValid()
 {
     return validator.validatePassword(loginForm.password().value);
 }
-
 function toggleButtons(className, display) 
+{
+    var i, elements;
+    elements = document.getElementsByClassName(className);
+    for (i = 0; i < elements.length; i++) 
     {
-      var i, elements;
-      elements = document.getElementsByClassName(className);
-      for (i = 0; i < elements.length; i++) 
-      {
-        elements[i].style.display = display;
-      }
-
+    elements[i].style.display = display;
     }
-function loading(){
+}
+function loading() {
     preloader.showLoading();
 }
