@@ -5,6 +5,8 @@ import { firebaseConfig } from "./firebase/firebase.js";
 import * as validator from "./validators/validator.js";
 import * as errors from "./errors/errors.js";
 import * as preloader from "./preloaders/preloader.js";
+import * as graph from "./graph/graph.js";
+
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -17,38 +19,16 @@ const loginForm = {
     passwordResetButton: () => document.getElementById("recover-password-button"),
 }
 /* GRAFICO INICIO*/
-const arrayValuesTemperature = [];
-const arrayValuesHumidity = [];
-const arrayValuesPressure = [];
-const ctxTemperature = document.getElementById('myChartTemperature');
-const ctxHumidity = document.getElementById('myChartHumidity');
-const ctxPressure = document.getElementById('myChartPressure');
+export const arrayValuesTemperature = [];
+export const arrayValuesHumidity = [];
+export const arrayValuesPressure = [];
 
 function addValueArrayTemperature(value) { // Função Armazena dados Temperatura
-    if (arrayValuesTemperature.length >= 10) { 
+    if (arrayValuesTemperature.length >= 10) {
         arrayValuesTemperature.shift();
     }
     arrayValuesTemperature.push(value);
 }
-
-new Chart(ctxTemperature, { //GRAFICO TEMPERATURA
-    type: 'line',
-    data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        datasets: [{
-            label: 'Temperatura',
-            data: (arrayValuesTemperature),
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
 
 function addValueArrayHumidity(value) { // Função Armazena dados Umidade
     if (arrayValuesHumidity.length >= 10) {
@@ -57,51 +37,14 @@ function addValueArrayHumidity(value) { // Função Armazena dados Umidade
     arrayValuesHumidity.push(value);
 }
 
-new Chart(ctxHumidity, { //GRAFICO UMIDADE
-    type: 'line',
-    data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        datasets: [{
-            label: 'Umidade',
-            data: (arrayValuesHumidity),
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
 function addValueArrayPressure(value) { // Função Armazena dados PRESSAO
-    if (arrayValuesPressure.length >= 10) { 
+    if (arrayValuesPressure.length >= 10) {
         arrayValuesPressure.shift();
     }
     arrayValuesPressure.push(value);
 }
+graph.showGraph();
 
-new Chart(ctxPressure, { //GRAFICO PRESSAO
-    type: 'line',
-    data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        datasets: [{
-            label: 'Pressão',
-            data: (arrayValuesPressure),
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-/* GRAFICO FIM */
 onAuthStateChanged(auth, (user) => {
     if (user) {
         updateData();
@@ -191,9 +134,9 @@ function updateData() {
     getData("data/humidity", 'humidity', 'value');
     getData("data/pressure", 'pressure', 'value');
     getData("data/temperature", 'temperature', 'value');
-    addValueArrayHumidity(document.getElementById('humidity').value);
-    addValueArrayPressure(document.getElementById('pressure').value);
-    addValueArrayTemperature(document.getElementById('temperature').value);
+    graph.addValueArrayHumidity(document.getElementById('humidity').value);
+    graph.addValueArrayPressure(document.getElementById('pressure').value);
+    graph.addValueArrayTemperature(document.getElementById('temperature').value);
 }
 function updateFormData() {
     getData("setPoints/humidityFrom", 'humidityFrom', 'value');

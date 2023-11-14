@@ -572,3 +572,12 @@ footer {
   display: inline-block;
 }
 /*GRAFICOS*/
+
+/*ESQUECI-A-SENHA*/
+.forgot-pass {
+  border: 2px solid rgb(0, 0, 0);
+  background-color: gray;
+  color: rgba(247, 247, 247, 0.82);
+}
+
+/*ESQUECI-A-SENHA*/
