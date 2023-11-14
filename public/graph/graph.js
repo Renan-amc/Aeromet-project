@@ -1,8 +1,16 @@
-import { arrayValuesTemperature, arrayValuesHumidity, arrayValuesPressure } from '../index.js';
+const arrayValuesTemperature = [];
+const arrayValuesHumidity = [];
+const arrayValuesPressure = [];
+const DISPLAY = true;
+const BORDER = true;
+const CHART_AREA = true;
+const TICKS = true;
 
+var chart = null; 
 export function showGraph() { // função cria gráfico pela biblioteca chart.js
     const ctx = document.getElementById('myChart');
-    const chart = new Chart(ctx, {
+    if(chart != null) chart.destroy();
+    chart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
@@ -15,10 +23,28 @@ export function showGraph() { // função cria gráfico pela biblioteca chart.js
                 data: arrayValuesHumidity,
                 borderWidth: 4
             }, {
-                label: 'Pressão (hPa)',
+                label: 'Pressão (kPa)',
                 data: arrayValuesPressure,
                 borderWidth: 4
             }]
+        },
+        options: {
+            scales: {
+                x: {
+                    border: {
+                        display: BORDER
+                    }
+                },
+                y: {
+                    border: {
+                        display: false
+                    },
+                    grid: {
+                        display: DISPLAY,
+                        color: '#7F7F7F'
+                    }
+                }
+            }
         }
     });
 }

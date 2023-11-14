@@ -23,28 +23,6 @@ export const arrayValuesTemperature = [];
 export const arrayValuesHumidity = [];
 export const arrayValuesPressure = [];
 
-function addValueArrayTemperature(value) { // Função Armazena dados Temperatura
-    if (arrayValuesTemperature.length >= 10) {
-        arrayValuesTemperature.shift();
-    }
-    arrayValuesTemperature.push(value);
-}
-
-function addValueArrayHumidity(value) { // Função Armazena dados Umidade
-    if (arrayValuesHumidity.length >= 10) {
-        arrayValuesHumidity.shift();
-    }
-    arrayValuesHumidity.push(value);
-}
-
-function addValueArrayPressure(value) { // Função Armazena dados PRESSAO
-    if (arrayValuesPressure.length >= 10) {
-        arrayValuesPressure.shift();
-    }
-    arrayValuesPressure.push(value);
-}
-graph.showGraph();
-
 onAuthStateChanged(auth, (user) => {
     if (user) {
         updateData();
@@ -137,6 +115,7 @@ function updateData() {
     graph.addValueArrayHumidity(document.getElementById('humidity').value);
     graph.addValueArrayPressure(document.getElementById('pressure').value);
     graph.addValueArrayTemperature(document.getElementById('temperature').value);
+    graph.showGraph();
 }
 function updateFormData() {
     getData("setPoints/humidityFrom", 'humidityFrom', 'value');
@@ -149,7 +128,7 @@ function updateFormData() {
 function getData(path, htmlId, htmlProperty) {
     get(child(dbRef, path)).then((snapshot) => {
         if (snapshot.exists()) {
-            document.getElementById(htmlId)[htmlProperty] = snapshot.val();
+            document.getElementById(htmlId)[htmlProperty] = htmlId.includes('pressure') ? snapshot.val()/10 : snapshot.val();
         }
         else {
             console.log("No data available ->", htmlId);
@@ -166,8 +145,8 @@ function writeSetPoints() {
     {
         humidityFrom: parseFloat(document.getElementById('humidityFrom')['value']),
         humidityUpTo: parseFloat(document.getElementById('humidityUpTo')['value']),
-        pressureFrom: parseFloat(document.getElementById('pressureFrom')['value']),
-        pressureUpTo: parseFloat(document.getElementById('pressureUpTo')['value']),
+        pressureFrom: parseFloat(document.getElementById('pressureFrom')['value'])*10,
+        pressureUpTo: parseFloat(document.getElementById('pressureUpTo')['value'])*10,
         temperatureFrom: parseFloat(document.getElementById('temperatureFrom')['value']),
         temperatureUpTo: parseFloat(document.getElementById('temperatureUpTo')['value'])
     };
