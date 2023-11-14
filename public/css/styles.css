@@ -579,5 +579,9 @@ footer {
   background-color: gray;
   color: rgba(247, 247, 247, 0.82);
 }
-
 /*ESQUECI-A-SENHA*/
+
+
+.chart{
+  max-height: 70vh;
+}
